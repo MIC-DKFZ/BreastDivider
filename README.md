@@ -23,7 +23,7 @@ In this work, we introduce the **first publicly available large-scale dataset wi
 
 - 🔹 A **13.000+ cases 3D breast MRI dataset** with **left/right segmentation masks**, suitable for downstream tasks and **model pretraining**: [🤗 BreastDividerModel](https://huggingface.co/ykirchhoff/BreastDividerModel)
 - 🔹 A **pretrained nnU-Net model** achieving **0.99 Dice** in 5-fold cross-validation for **robust left–right breast segmentation**: [🤗 BreastDividerDataset ](https://huggingface.co/datasets/Bubenpo/BreastDividerDataset)  
-- 🔹 A ready-to-use **Docker container** for seamless deployment and inference: Coming Soon!
+- 🔹 A ready-to-use **Docker container** for seamless deployment and inference: [DockerHub](https://hub.docker.com/r/ykirchhoff/breastdivider)
 
 Stay tuned for updates! 🚀
 
