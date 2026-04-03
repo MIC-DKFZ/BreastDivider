@@ -1,14 +1,10 @@
-# [MICCAI 2025 WOMEN] BreastDivider: A Large-Scale Dataset and Model for Left–Right Breast MRI Segmentation
-
-**Read the paper:**  [![arXiv](https://img.shields.io/badge/arXiv-2507.13830-B31B1B.svg)](https://arxiv.org/abs/2507.13830)
-
-> **Authors**: Maximilian Rokuss*, Benjamin Hamm*, Yannick Kirchhoff*, Klaus Maier-Hein  
-> *equal contribution
+# BreastDivider: A Large-Scale Dataset and Model for Left–Right Breast MRI Segmentation
 
 ---
 
 ## 📰 News
 
+- **04/26** – **Released BreastDivider Model Pip package** for easier use!
 - **08/25** – 📦 **Dataset V2 released** — now **17,956 cases** with **left/right** as well as partial **lesion segmentation** masks, and over **3000 lesion classification targets** 
 - **08/25** – 🏆 **Used in the winning solution** of the [ODELIA Breast Cancer Classification Challenge](https://odelia2025.grand-challenge.org/)
 - **07/25** – **Released BreastDivider Model and Dataset** for public use
@@ -68,6 +64,63 @@ dataset/
 
 ---
 
+## Install
+
+```bash
+pip install breastdivider
+```
+
+## Python Usage
+
+```python
+from breastdivider import predict
+
+predict(
+    input_path="case_0000.nii.gz",
+    output_path="case_seg.nii.gz",
+)
+```
+
+For repeated inference, create and reuse a predictor:
+
+```python
+from breastdivider import BreastDividerPredictor
+
+predictor = BreastDividerPredictor(device="cuda")
+predictor.predict(
+    input_path="case_0000.nii.gz",
+    output_path="case_seg.nii.gz",
+)
+```
+
+## CLI Usage
+
+```bash
+breastdivider predict case_0000.nii.gz case_seg.nii.gz --device cuda
+```
+
+To pre-download the model:
+
+```bash
+breastdivider download
+```
+
+## Input Format
+
+`nnunetv2` expects single-channel files named like `CASE_0000.nii.gz`.
+
+- If you pass a directory, the package forwards it directly to `nnunetv2`.
+- Directory inputs with arbitrary `.nii.gz` filenames are automatically staged into nnU-Net's `CASE_0000.nii.gz` naming scheme before prediction.
+- If you pass a single `.nii.gz` file, the package temporarily stages it under the expected `*_0000.nii.gz` naming scheme before prediction.
+
+## Notes
+
+- The underlying model is hosted at [ykirchhoff/BreastDividerModel](https://huggingface.co/ykirchhoff/BreastDividerModel).
+- The inference backend is [`nnunetv2`](https://pypi.org/project/nnunetv2/).
+- The package is a wrapper around the published model.
+
+---
+
 ## 📄 Citation
 
 If you use this dataset or model in your work, please cite:
@@ -80,3 +133,6 @@ If you use this dataset or model in your work, please cite:
   year      = {2025}
 }
 ```
+
+## License
+Note that while this repository is available under Apache-2.0 license (see [LICENSE](./LICENSE)), the [model checkpoint](https://huggingface.co/ykirchhoff/BreastDividerModel) is `Creative Commons Attribution Non Commercial Share Alike 4.0`! 
